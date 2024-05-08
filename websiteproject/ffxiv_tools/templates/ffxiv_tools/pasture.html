@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'ffxiv_tools/pasture_style.css' %}"> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="flex flex-outer">
+        <div class="flex flex-inner inner-left">
+            <div>
+                Header and Size Selector
+            </div>
+            <div>
+                <h3>Name | Item 1 | Item 2</h3>
+                <div></div>
+            </div>
+        </div>
+        <div class="flex flex-inner inner-mid">
+            <div>
+                Item Sort
+                All Item Option | Item 1 Option | Item 2 Option
+                <div class="dropdown">
+                    <button onclick="dropMenuFunction('item-all-drop')" class="drop-button">All Items</button>
+                    <div class="drop-container" id="item-all-drop">
+                        {% for item in item_list %}
+                            <button onclick="dropSelectFunction('animal', '.{{ item.item_name }}1, .{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-all">{{ item.item_name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button onclick="dropMenuFunction('item1-drop')" class="drop-button">Item One</button>
+                    <div class="drop-container" id="item1-drop">
+                        {% for item in item_list %}
+                            <button onclick="dropSelectFunction('animal', '.{{ item.item_name }}1')" class="drop-choice" id="{{ item.item_name }}-all">{{ item.item_name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button onclick="dropMenuFunction('item2-drop')" class="drop-button">Item Two</button>
+                    <div class="drop-container" id="item2-drop">
+                        {% for item in item_list %}
+                            <button onclick="dropSelectFunction('animal', '.{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-all">{{ item.item_name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div>
+                Animal List
+                {% for animal in animal_list %}
+                    <li class="animal {{ animal.item_1 }}1 {{ animal.item_2 }}2">
+                        {{ animal.animal_name }} | 
+                        {{ animal.item_1 }} |
+                        {{ animal.item_2 }}
+                    </li>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="flex flex-inner inner-right">
+            <div>
+                Feed Selector
+            </div>
+            <div>
+                Calculations
+
+                Current Feed & Mult
+
+                Predicted Yield
+
+                Suggested Yield
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'ffxiv_tools/js/dropdown.js' %}"></script>
+</body>
+</html>

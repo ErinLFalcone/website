@@ -1,0 +1,50 @@
+/* Flex box styling for page layout */
+.flex {
+    display: flex;
+}
+
+/* Outer container */
+.flex-outer {
+    flex-flow: row wrap;
+    align-items: flex-start;
+    background-color: red;
+    gap: 24px;
+}
+
+/* Inner third sections */
+.flex-inner {
+    flex-direction: column;
+    align-items: center flex-start;
+    background-color: purple;
+    outline: solid black;
+    outline-width: thick;
+    margin: 24px;
+}
+
+.inner-left {
+flex-grow: 5;
+}
+
+.inner-mid {
+flex-grow: 4;
+}
+
+.inner-right {
+flex-grow: 1;
+}
+
+/* Dropdown menu styling */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.drop-container {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.drop-click {
+    display: block;
+}
