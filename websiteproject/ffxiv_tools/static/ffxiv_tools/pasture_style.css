@@ -45,6 +45,6 @@ flex-grow: 1;
     z-index: 1;
 }
 
-.drop-click {
+.block-display {
     display: block;
 }
