@@ -1,4 +1,4 @@
-const dropDownClasses = ['item-all-drop', 'item1-drop', 'item2-drop'];
+const dropDownClasses = ['size-drop', 'item-all-drop', 'item1-drop', 'item2-drop'];
 var dropQueryAll = document.querySelectorAll('.drop-container');
 
 // Toggles dropdown menu when button is clicked on
@@ -24,7 +24,7 @@ document.addEventListener('click', function(e) {
     };
 }, false);
 
-// Shows and hides items based on buttons clicked in dropdown
+// Hides all options of base class, unhides based on dropdown selection
 function dropSelectFunction(dropMenuClass, dropSelectionClass) {
     var selectHideList = document.querySelectorAll(`.${dropMenuClass}`);
     selectHideList.forEach((item) => item.style.display="none");

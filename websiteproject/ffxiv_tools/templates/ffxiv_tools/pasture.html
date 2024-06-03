@@ -12,12 +12,30 @@
         <div class="flex flex-inner inner-left">
             <div>
                 Header and Size Selector
+                <div class="dropdown">
+                    <button class="drop-button" id="size-drop-button">Sizes</button>
+                    <div class="drop-container" id="size-drop">
+                        <button onclick="dropSelectFunction('animal-slot', '.small')" class="drop-choice">Small</button>
+                        <button onclick="dropSelectFunction('animal-slot', '.medium')" class="drop-choice">Medium</button>
+                        <button onclick="dropSelectFunction('animal-slot', '.large')" class="drop-choice">Large</button>
+                    </div>
+                </div>
             </div>
             <div>
                 <h3>Name | Item 1 | Item 2</h3>
                 {% for slot in animal_slot %}
-                    <div class="animal-slot">Test
+                    {% if forloop.counter <= 5 %}
+                    <div class="animal-slot small medium large">Test
                     </div>
+                    {% endif %}
+                    {% if forloop.counter > 5 and forloop.counter <= 10 %}
+                    <div class="animal-slot medium large">Test
+                    </div>
+                    {% endif %}
+                    {% if forloop.counter > 10 and forloop.counter <= 20 %}
+                    <div class="animal-slot large">Test
+                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
