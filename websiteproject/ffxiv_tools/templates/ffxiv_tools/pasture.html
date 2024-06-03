@@ -15,45 +15,48 @@
             </div>
             <div>
                 <h3>Name | Item 1 | Item 2</h3>
-                <div></div>
+                {% for slot in animal_slot %}
+                    <div class="animal-slot">Test
+                    </div>
+                {% endfor %}
             </div>
         </div>
         <div class="flex flex-inner inner-mid">
             <div>
-                Item Sort
-                All Item Option | Item 1 Option | Item 2 Option
+                <!-- Item filter dropdown menus -->
                 <div class="dropdown">
-                    <!-- <button onclick="dropMenuFunction('item-all-drop')" class="drop-button" id="item-all-drop-button">All Items</button> -->
                     <button class="drop-button" id="item-all-drop-button">All Items</button>
                     <div class="drop-container" id="item-all-drop">
+                        <button onclick="dropSelectFunction('animal', '.animal')" class="drop-choice" id="animal-show-all">Show All</button>
                         {% for item in item_list %}
                             <button onclick="dropSelectFunction('animal', '.{{ item.item_name }}1, .{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-all">{{ item.item_name }}</button>
                         {% endfor %}
                     </div>
                 </div>
                 <div class="dropdown">
-                    <!-- <button onclick="dropMenuFunction('item1-drop')" class="drop-button" id="item1-drop-button">Item One</button> -->
                     <button class="drop-button" id="item1-drop-button">Item One</button>
                     <div class="drop-container" id="item1-drop">
+                        <button onclick="dropSelectFunction('animal', '.animal')" class="drop-choice" id="animal-show-one">Show All</button>
                         {% for item in item_list %}
                             <button onclick="dropSelectFunction('animal', '.{{ item.item_name }}1')" class="drop-choice" id="{{ item.item_name }}-one">{{ item.item_name }}</button>
                         {% endfor %}
                     </div>
                 </div>
                 <div class="dropdown">
-                    <!-- <button onclick="dropMenuFunction('item2-drop')" class="drop-button" id="item2-drop-button">Item Two</button> -->
                     <button class="drop-button" id="item2-drop-button">Item Two</button>
                     <div class="drop-container" id="item2-drop">
+                        <button onclick="dropSelectFunction('animal', '.animal')" class="drop-choice" id="animal-show-two">Show All</button>
                         {% for item in item_list %}
                             <button onclick="dropSelectFunction('animal', '.{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-two">{{ item.item_name }}</button>
                         {% endfor %}
                     </div>
                 </div>
             </div>
+            <!-- List of all animals -->
             <div>
                 Animal List
                 {% for animal in animal_list %}
-                    <li class="animal {{ animal.item_1 }}1 {{ animal.item_2 }}2">
+                    <li draggable="true" class="animal {{ animal.item_1 }}1 {{ animal.item_2 }}2">
                         {{ animal.animal_name }} | 
                         {{ animal.item_1 }} |
                         {{ animal.item_2 }}
@@ -77,5 +80,6 @@
         </div>
     </div>
     <script src="{% static 'ffxiv_tools/js/dropdown.js' %}"></script>
+    <script src="{% static 'ffxiv_tools/js/dragdrop.js' %}"></script>
 </body>
 </html>

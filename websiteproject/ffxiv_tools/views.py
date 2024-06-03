@@ -10,5 +10,6 @@ def pasture_planner(request):
         "feed_list": feed_objs,
         "animal_list": animal_objs,
         "item_list": item_objs,
+        "animal_slot": range(20),
     }
     return render(request, "ffxiv_tools/pasture.html", context)

@@ -4,13 +4,13 @@ var dropQueryAll = document.querySelectorAll('.drop-container');
 // Toggles dropdown menu when button is clicked on
 function dropMenuToggle(dropdownId) {
     document.getElementById(`${dropdownId}`).classList.toggle("block-display")
-}
+};
 
 // Hides all dropdown containers except the one identified by ID with attribute
 function dropMenuClose(dropdownToKeep) {
     var dropdownHideList = document.querySelectorAll(`.drop-container:not(#${dropdownToKeep})`);
     dropdownHideList.forEach((item) => item.classList.remove("block-display"));
-}
+};
 
 // Listens for clicks, opens dropdowns when button clicked, hides when clicked outside
 document.addEventListener('click', function(e) {

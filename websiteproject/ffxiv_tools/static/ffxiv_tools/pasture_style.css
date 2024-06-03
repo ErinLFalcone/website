@@ -48,3 +48,7 @@ flex-grow: 1;
 .block-display {
     display: block;
 }
+
+.animal {
+    border: solid;
+}
