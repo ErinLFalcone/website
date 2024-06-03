@@ -2,6 +2,8 @@ const dragItems = document.querySelectorAll(".animal");
 
 var currentDragEl = null;
 
+// Function and loop below to add dragstart listener to initial
+// draggable items
 function addDragstart(item) {
     item.addEventListener("dragstart", (e) => {
         currentDragEl = e.currentTarget;
@@ -14,37 +16,45 @@ dragItems.forEach((item) => {
     addDragstart(item);
 });
 
+
+// Beginning of drop logic
 const dropAreas = document.querySelectorAll(".animal-slot");
 
+// Checks if drop area already contains an item:
+// If no item exists, inserts dragged item and
+// adds dragstart listener
+// --If item was being dragged from another slot,
+// --removes old item
+// 
+// Else, if an item exists in the target slot,
+// swaps position of the two items
+function dropEvent(e) {
+    const dropHTML = e.dataTransfer.getData("text/html");
+    
+    if (!e.currentTarget.classList.contains("has-drop")) {
+        e.currentTarget.innerHTML = dropHTML;
+        e.currentTarget.classList.add("has-drop");
+        addDragstart(e.currentTarget);
+        
+        if (currentDragEl.classList.contains("has-drop")) {
+            while (currentDragEl.firstChild) {
+                currentDragEl.removeChild(currentDragEl.firstChild);
+            };
+            currentDragEl.classList.remove("has-drop");
+            currentDragEl.innerHTML += "New Text";
+        };
+
+    } else {
+        currentDragEl.innerHTML = e.currentTarget.innerHTML;
+        e.currentTarget.innerHTML = dropHTML;
+    };
+};
+
+// Adds initial drop listeners
 function dropCheck(e) {
     if (e.dataTransfer.types.includes("text/html")) {
         e.preventDefault();
     };
-};
-
-function dropEvent(e) {
-    const dropHTML = e.dataTransfer.getData("text/html");
-    e.currentTarget.innerHTML = dropHTML;
-    e.currentTarget.classList.add("has-drop");
-    addDragstart(e.currentTarget);
-    
-    if (currentDragEl.classList.contains("has-drop")) {
-        while (currentDragEl.firstChild) {
-            currentDragEl.removeChild(currentDragEl.firstChild);
-        };
-        currentDragEl.classList.remove("has-drop");
-        currentDragEl.innerHTML += "New Text";
-    };
-};
-
-function endEvent(e) {
-    if (e.target.classList.contains("has-drop")) {
-        console.log("Yes, has-drop");
-    };
-};
-
-ondragend = (e) => {
-    endEvent(e);
 };
 
 dropAreas.forEach((item) => {
@@ -57,9 +67,6 @@ dropAreas.forEach((item) => {
     item.addEventListener("drop", (e) => {
         dropEvent(e);
     });
-    // item.addEventListener("dragend", (e) => {
-    //     endEvent(e);
-    // });
 });
 
 
