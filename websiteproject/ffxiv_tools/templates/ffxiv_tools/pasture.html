@@ -71,7 +71,7 @@
                 </div>
             </div>
             <!-- List of all animals -->
-            <div>
+            <div class="animal-list">
                 Animal List
                 {% for animal in animal_list %}
                     <li draggable="true" class="animal {{ animal.item_1 }}1 {{ animal.item_2 }}2">
@@ -84,7 +84,14 @@
         </div>
         <div class="flex flex-inner inner-right">
             <div>
-                Feed Selector
+                <div class="dropdown">
+                    <button class="drop-button" id="feed-drop-button">Feed Selector</button>
+                    <div class="drop-container" id="feed-drop">
+                        {% for feed in feed_list %}
+                            <button onclick="false" class="drop-choice">{{ feed.feed_name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
             <div>
                 Calculations

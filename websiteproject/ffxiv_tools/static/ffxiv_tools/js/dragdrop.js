@@ -69,4 +69,13 @@ dropAreas.forEach((item) => {
     });
 });
 
-
+// Click to add items to drop list
+const animalList = document.querySelector("div.animal-list");
+animalList.addEventListener("click", (e) => {
+    const firstEmptySlot = document.querySelector("div.animal-slot:not(.has-drop):not(.none-display)");
+    if (firstEmptySlot) {
+        firstEmptySlot.innerHTML = e.target.outerHTML;
+        firstEmptySlot.classList.add("has-drop");
+        addDragstart(firstEmptySlot);
+    };
+});

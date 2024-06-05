@@ -49,6 +49,10 @@ flex-grow: 1;
     display: block;
 }
 
+.none-display {
+    display: none;
+}
+
 .animal {
     border: solid;
 }
