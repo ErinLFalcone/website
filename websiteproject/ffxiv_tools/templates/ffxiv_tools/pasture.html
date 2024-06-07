@@ -22,7 +22,7 @@
                 </div>
                 <button onclick="clearSlots('all-slots')">Clear All</button>
             </div>
-            <div>
+            <div class="selected-animals">
                 <h3>Name | Item 1 | Item 2</h3>
                 {% for slot in animal_slot %}
                     {% if forloop.counter <= 5 %}
@@ -99,12 +99,24 @@
 
                 Current Feed & Mult
 
-                Predicted Yield
-
-                Suggested Yield
+                <table class="item-list">
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Predicted</th>
+                        <th scope="col">Suggested</th>
+                    </tr>
+                    {% for item in item_list %}
+                        <tr>
+                            <th scope="row">{{ item.item_name }}</th>
+                            <td id="{{ item.item_name }}-number">0</td>
+                            <td>{{ item.suggested_num }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
             </div>
         </div>
     </div>
+    <script src="{% static 'ffxiv_tools/js/calculation.js' %}"></script>
     <script src="{% static 'ffxiv_tools/js/dropdown.js' %}"></script>
     <script src="{% static 'ffxiv_tools/js/dragdrop.js' %}"></script>
 </body>

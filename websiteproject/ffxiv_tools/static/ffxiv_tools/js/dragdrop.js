@@ -19,7 +19,6 @@ dragItems.forEach((item) => {
     addDragstart(item);
 });
 
-
 // Beginning of drop logic
 const dropAreas = document.querySelectorAll(".animal-slot");
 
@@ -71,6 +70,7 @@ dropAreas.forEach((item) => {
     });
     item.addEventListener("drop", (e) => {
         dropEvent(e);
+        itemCountUpdate();
     });
 });
 
@@ -83,6 +83,7 @@ animalList.addEventListener("click", (e) => {
         firstEmptySlot.classList.add("has-drop");
         addDragstart(firstEmptySlot);
     };
+    itemCountUpdate();
 });
 
 // Clears filled slots, excludes slots with class passed as attribute
