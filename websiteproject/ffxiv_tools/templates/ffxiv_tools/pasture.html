@@ -15,11 +15,12 @@
                 <div class="dropdown">
                     <button class="drop-button" id="size-drop-button">Sizes</button>
                     <div class="drop-container" id="size-drop">
-                        <button onclick="dropSelectFunction('animal-slot', '.small')" class="drop-choice">Small</button>
-                        <button onclick="dropSelectFunction('animal-slot', '.medium')" class="drop-choice">Medium</button>
+                        <button onclick="dropSelectFunction('animal-slot', '.small'); clearSlots('small')" class="drop-choice">Small</button>
+                        <button onclick="dropSelectFunction('animal-slot', '.medium'); clearSlots('medium')" class="drop-choice">Medium</button>
                         <button onclick="dropSelectFunction('animal-slot', '.large')" class="drop-choice">Large</button>
                     </div>
                 </div>
+                <button onclick="clearSlots('all-slots')">Clear All</button>
             </div>
             <div>
                 <h3>Name | Item 1 | Item 2</h3>
@@ -45,27 +46,27 @@
                 <div class="dropdown">
                     <button class="drop-button" id="item-all-drop-button">All Items</button>
                     <div class="drop-container" id="item-all-drop">
-                        <button onclick="dropSelectFunction('animal', '.animal')" class="drop-choice" id="animal-show-all">Show All</button>
+                        <button onclick="dropSelectFunction('drag-animal', '.drag-animal')" class="drop-choice" id="animal-show-all">Show All</button>
                         {% for item in item_list %}
-                            <button onclick="dropSelectFunction('animal', '.{{ item.item_name }}1, .{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-all">{{ item.item_name }}</button>
+                            <button onclick="dropSelectFunction('drag-animal', '.{{ item.item_name }}1, .{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-all">{{ item.item_name }}</button>
                         {% endfor %}
                     </div>
                 </div>
                 <div class="dropdown">
                     <button class="drop-button" id="item1-drop-button">Item One</button>
                     <div class="drop-container" id="item1-drop">
-                        <button onclick="dropSelectFunction('animal', '.animal')" class="drop-choice" id="animal-show-one">Show All</button>
+                        <button onclick="dropSelectFunction('drag-animal', '.drag-animal')" class="drop-choice" id="animal-show-one">Show All</button>
                         {% for item in item_list %}
-                            <button onclick="dropSelectFunction('animal', '.{{ item.item_name }}1')" class="drop-choice" id="{{ item.item_name }}-one">{{ item.item_name }}</button>
+                            <button onclick="dropSelectFunction('drag-animal', '.{{ item.item_name }}1')" class="drop-choice" id="{{ item.item_name }}-one">{{ item.item_name }}</button>
                         {% endfor %}
                     </div>
                 </div>
                 <div class="dropdown">
                     <button class="drop-button" id="item2-drop-button">Item Two</button>
                     <div class="drop-container" id="item2-drop">
-                        <button onclick="dropSelectFunction('animal', '.animal')" class="drop-choice" id="animal-show-two">Show All</button>
+                        <button onclick="dropSelectFunction('drag-animal', '.drag-animal')" class="drop-choice" id="animal-show-two">Show All</button>
                         {% for item in item_list %}
-                            <button onclick="dropSelectFunction('animal', '.{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-two">{{ item.item_name }}</button>
+                            <button onclick="dropSelectFunction('drag-animal', '.{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-two">{{ item.item_name }}</button>
                         {% endfor %}
                     </div>
                 </div>
@@ -74,7 +75,7 @@
             <div class="animal-list">
                 Animal List
                 {% for animal in animal_list %}
-                    <li draggable="true" class="animal {{ animal.item_1 }}1 {{ animal.item_2 }}2">
+                    <li draggable="true" class="animal drag-animal {{ animal.item_1 }}1 {{ animal.item_2 }}2">
                         {{ animal.animal_name }} | 
                         {{ animal.item_1 }} |
                         {{ animal.item_2 }}

@@ -18,13 +18,13 @@ document.addEventListener('click', function(e) {
     if (dropDownClasses.includes(e.target.id.slice(0,-7))) {
         dropMenuToggle(`${e.target.id.slice(0,-7)}`);
         dropMenuClose(`${e.target.id.slice(0,-7)}`);
-    // Hides dropdown menus when clicked outside of
+    // Hides dropdown menus when clicked outside
     } else if (!e.target.classList.contains("drop-choice")) {
         dropMenuClose("dummy-class");
     };
 }, false);
 
-// Hides all options of base class, unhides based on dropdown selection
+// Hides all options of drop menu by class, then unhides dropdown selection
 function dropSelectFunction(dropMenuClass, dropSelectionClass) {
     var selectHideList = document.querySelectorAll(`.${dropMenuClass}`);
     selectHideList.forEach((item) => {
@@ -33,7 +33,7 @@ function dropSelectFunction(dropMenuClass, dropSelectionClass) {
         };
         item.classList.add("none-display");
     });
-    
+
     var selectList = document.querySelectorAll(`${dropSelectionClass}`);
     selectList.forEach((item) => {
         if (item.classList.contains("none-display")) {

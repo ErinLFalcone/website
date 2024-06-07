@@ -1,14 +1,17 @@
 const dragItems = document.querySelectorAll(".animal");
-
 var currentDragEl = null;
+var isDragging = false;
 
 // Function and loop below to add dragstart listener to initial
 // draggable items
 function addDragstart(item) {
     item.addEventListener("dragstart", (e) => {
+        isDragging = true;
         currentDragEl = e.currentTarget;
-        e.dataTransfer.setData("text/html", e.target.outerHTML);
-        e.dataTransfer.effectAllowed = "move";
+        const dataToDrag = e.target;
+        dataToDrag.classList.remove("drag-animal");
+        e.dataTransfer.setData("text/html", dataToDrag.outerHTML);
+        e.dataTransfer.effectAllowed = "copyMove";
     });
 };
 
@@ -35,7 +38,6 @@ function dropEvent(e) {
         e.currentTarget.innerHTML = dropHTML;
         e.currentTarget.classList.add("has-drop");
         addDragstart(e.currentTarget);
-        
         if (currentDragEl.classList.contains("has-drop")) {
             while (currentDragEl.firstChild) {
                 currentDragEl.removeChild(currentDragEl.firstChild);
@@ -45,14 +47,17 @@ function dropEvent(e) {
         };
 
     } else {
-        currentDragEl.innerHTML = e.currentTarget.innerHTML;
+        if (currentDragEl.classList.contains("has-drop")) {
+            currentDragEl.innerHTML = e.currentTarget.innerHTML;
+        };
         e.currentTarget.innerHTML = dropHTML;
     };
+    isDragging = false;
 };
 
 // Adds initial drop listeners
 function dropCheck(e) {
-    if (e.dataTransfer.types.includes("text/html")) {
+    if (isDragging) {
         e.preventDefault();
     };
 };
@@ -79,3 +84,14 @@ animalList.addEventListener("click", (e) => {
         addDragstart(firstEmptySlot);
     };
 });
+
+// Clears filled slots, excludes slots with class passed as attribute
+function clearSlots(clearClass) {
+    const noneDisplaySlots = document.querySelectorAll("div.animal-slot.has-drop");
+    noneDisplaySlots.forEach((item) => {
+        if (!item.classList.contains(`${clearClass}`)) {
+            item.classList.remove("has-drop");
+            item.innerHTML = "cleared";
+        };
+    });
+};
