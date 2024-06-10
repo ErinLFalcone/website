@@ -48,7 +48,7 @@
                     <div class="drop-container" id="item-all-drop">
                         <button onclick="dropSelectFunction('drag-animal', '.drag-animal')" class="drop-choice" id="animal-show-all">Show All</button>
                         {% for item in item_list %}
-                            <button onclick="dropSelectFunction('drag-animal', '.{{ item.item_name }}1, .{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-all">{{ item.item_name }}</button>
+                            <button onclick="dropSelectFunction('drag-animal', '.{{ item.item_name }}-one, .{{ item.item_name }}-two')" class="drop-choice" id="{{ item.item_name }}-all">{{ item.item_name }}</button>
                         {% endfor %}
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                     <div class="drop-container" id="item1-drop">
                         <button onclick="dropSelectFunction('drag-animal', '.drag-animal')" class="drop-choice" id="animal-show-one">Show All</button>
                         {% for item in item_list %}
-                            <button onclick="dropSelectFunction('drag-animal', '.{{ item.item_name }}1')" class="drop-choice" id="{{ item.item_name }}-one">{{ item.item_name }}</button>
+                            <button onclick="dropSelectFunction('drag-animal', '.{{ item.item_name }}-one')" class="drop-choice" id="{{ item.item_name }}-one">{{ item.item_name }}</button>
                         {% endfor %}
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     <div class="drop-container" id="item2-drop">
                         <button onclick="dropSelectFunction('drag-animal', '.drag-animal')" class="drop-choice" id="animal-show-two">Show All</button>
                         {% for item in item_list %}
-                            <button onclick="dropSelectFunction('drag-animal', '.{{ item.item_name }}2')" class="drop-choice" id="{{ item.item_name }}-two">{{ item.item_name }}</button>
+                            <button onclick="dropSelectFunction('drag-animal', '.{{ item.item_name }}-two')" class="drop-choice" id="{{ item.item_name }}-two">{{ item.item_name }}</button>
                         {% endfor %}
                     </div>
                 </div>
@@ -75,7 +75,7 @@
             <div class="animal-list">
                 Animal List
                 {% for animal in animal_list %}
-                    <li draggable="true" class="animal drag-animal {{ animal.item_1 }}1 {{ animal.item_2 }}2">
+                    <li draggable="true" class="animal drag-animal {{ animal.item_1 }}-one {{ animal.item_2 }}-two">
                         {{ animal.animal_name }} | 
                         {{ animal.item_1 }} |
                         {{ animal.item_2 }}
@@ -89,26 +89,41 @@
                     <button class="drop-button" id="feed-drop-button">Feed Selector</button>
                     <div class="drop-container" id="feed-drop">
                         {% for feed in feed_list %}
-                            <button onclick="false" class="drop-choice">{{ feed.feed_name }}</button>
+                            <button onclick="dropSelectFunction('feed-choice', '.{{ feed.feed_name|cut:" " }}')" class="drop-choice">{{ feed.feed_name }}</button>
                         {% endfor %}
                     </div>
+                </div>
+                <div>
+                    <table class="feed-list">
+                        <tr>
+                            <th scope="col">Selected Feed</th>
+                            <th scope="col">Multiplier</th>
+                        </tr>
+                        {% for feed in feed_list %}
+                            <tr class="feed-choice {{ feed.feed_name|cut:' ' }} {% cycle 'none-display' ''  'none-display' %}">
+                                <th scope="row">{{ feed.feed_name }}</th>
+                                <td class="feed-mult">{{ feed.mood_mult }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
             <div>
                 Calculations
-
-                Current Feed & Mult
-
                 <table class="item-list">
                     <tr>
                         <th scope="col">Item</th>
-                        <th scope="col">Predicted</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Second</th>
+                        <th scope="col">Total</th>
                         <th scope="col">Suggested</th>
                     </tr>
                     {% for item in item_list %}
                         <tr>
                             <th scope="row">{{ item.item_name }}</th>
-                            <td id="{{ item.item_name }}-number">0</td>
+                            <td id="{{ item.item_name }}-count-one">0</td>
+                            <td id="{{ item.item_name }}-count-two">0</td>
+                            <td id="{{ item.item_name }}-total">0</td>
                             <td>{{ item.suggested_num }}</td>
                         </tr>
                     {% endfor %}
