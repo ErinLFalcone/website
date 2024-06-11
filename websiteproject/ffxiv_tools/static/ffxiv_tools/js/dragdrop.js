@@ -95,4 +95,5 @@ function clearSlots(clearClass) {
             item.innerHTML = "cleared";
         };
     });
+    itemCountUpdate();
 };
