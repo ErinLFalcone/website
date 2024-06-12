@@ -9,7 +9,6 @@ function itemNumUpdate(item, slot, mult) {
     return numOfItem;
 };
 
-
 function itemCountUpdate() {
     for (let i = 0; i < itemList.length; i++) {
         const multNum = document.querySelector("tr.feed-choice:not(.none-display) td");

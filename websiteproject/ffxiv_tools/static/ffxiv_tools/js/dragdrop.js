@@ -2,16 +2,23 @@ const dragItems = document.querySelectorAll(".animal");
 var currentDragEl = null;
 var isDragging = false;
 
+// Regex check used in addDragStart so only a single item
+// defined below can be dropped 
+function regexTextCheck(text) {
+    regexPattern = RegExp(/(?!.*draggable.*draggable).*draggable.*/g);
+    return regexPattern.test(text);
+}
+
 // Function and loop below to add dragstart listener to initial
 // draggable items
 function addDragstart(item) {
     item.addEventListener("dragstart", (e) => {
-        isDragging = true;
         currentDragEl = e.currentTarget;
         const dataToDrag = e.target;
         dataToDrag.classList.remove("drag-animal");
         e.dataTransfer.setData("text/html", dataToDrag.outerHTML);
         e.dataTransfer.effectAllowed = "copyMove";
+        isDragging = regexTextCheck(`${e.dataTransfer.getData("text/html")}`);
     });
 };
 
