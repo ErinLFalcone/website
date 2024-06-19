@@ -15,7 +15,6 @@ function addDragstart(item) {
     item.addEventListener("dragstart", (e) => {
         currentDragEl = e.currentTarget;
         const dataToDrag = e.target;
-        dataToDrag.classList.remove("drag-animal");
         e.dataTransfer.setData("text/html", dataToDrag.outerHTML);
         e.dataTransfer.effectAllowed = "copyMove";
         isDragging = regexTextCheck(`${e.dataTransfer.getData("text/html")}`);
@@ -27,7 +26,15 @@ dragItems.forEach((item) => {
 });
 
 // Beginning of drop logic
-const dropAreas = document.querySelectorAll(".animal-slot");
+
+// used to remove class after drop, so dropdown filter doesn't target items
+function dragClassRemover() {
+    const classyAnimal = document.querySelector("div.selected-animals .drag-animal");
+    console.log(typeof classyAnimal);
+    if (classyAnimal) {
+        classyAnimal.classList.remove("drag-animal");
+    };
+};
 
 // Checks if drop area already contains an item:
 // If no item exists, inserts dragged item and
@@ -37,9 +44,10 @@ const dropAreas = document.querySelectorAll(".animal-slot");
 // 
 // Else, if an item exists in the target slot,
 // swaps position of the two items
+// Removes drag-animal class and sets isDragging flag to false
 function dropEvent(e) {
     const dropHTML = e.dataTransfer.getData("text/html");
-    
+
     if (!e.currentTarget.classList.contains("has-drop")) {
         e.currentTarget.innerHTML = dropHTML;
         e.currentTarget.classList.add("has-drop");
@@ -49,7 +57,7 @@ function dropEvent(e) {
                 currentDragEl.removeChild(currentDragEl.firstChild);
             };
             currentDragEl.classList.remove("has-drop");
-            currentDragEl.innerHTML += "New Text";
+            currentDragEl.innerHTML = null;
         };
 
     } else {
@@ -58,10 +66,14 @@ function dropEvent(e) {
         };
         e.currentTarget.innerHTML = dropHTML;
     };
+    // console.log(typeof e.currentTarget.innerHTML);
+    dragClassRemover();
     isDragging = false;
 };
 
 // Adds initial drop listeners
+const dropAreas = document.querySelectorAll(".animal-slot");
+
 function dropCheck(e) {
     if (isDragging) {
         e.preventDefault();
@@ -99,7 +111,7 @@ function clearSlots(clearClass) {
     noneDisplaySlots.forEach((item) => {
         if (!item.classList.contains(`${clearClass}`)) {
             item.classList.remove("has-drop");
-            item.innerHTML = "cleared";
+            item.innerHTML = null;
         };
     });
     itemCountUpdate();

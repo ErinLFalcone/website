@@ -26,15 +26,15 @@
                 <h3>Name | Item 1 | Item 2</h3>
                 {% for slot in animal_slot %}
                     {% if forloop.counter <= 5 %}
-                    <div class="animal-slot small medium large">Test
+                    <div class="animal-slot small medium large">
                     </div>
                     {% endif %}
                     {% if forloop.counter > 5 and forloop.counter <= 10 %}
-                    <div class="animal-slot medium large">Test
+                    <div class="animal-slot medium large">
                     </div>
                     {% endif %}
                     {% if forloop.counter > 10 and forloop.counter <= 20 %}
-                    <div class="animal-slot large">Test
+                    <div class="animal-slot large">
                     </div>
                     {% endif %}
                 {% endfor %}
@@ -94,38 +94,46 @@
                 </div>
                 <div>
                     <table class="feed-list">
-                        <tr>
-                            <th scope="col">Selected Feed</th>
-                            <th scope="col">Multiplier</th>
-                        </tr>
-                        {% for feed in feed_list %}
-                            <tr class="feed-choice {{ feed.feed_name|cut:' ' }} {% cycle 'none-display' ''  'none-display' %}">
-                                <th scope="row">{{ feed.feed_name }}</th>
-                                <td class="feed-mult">{{ feed.mood_mult }}</td>
+                        <thead>    
+                            <tr>
+                                <th scope="col">Selected Feed</th>
+                                <th scope="col">Multiplier</th>
                             </tr>
-                        {% endfor %}
+                        </thead>
+                        <tbody>
+                            {% for feed in feed_list %}
+                                <tr class="feed-choice {{ feed.feed_name|cut:' ' }} {% cycle 'none-display' ''  'none-display' %}">
+                                    <th scope="row">{{ feed.feed_name }}</th>
+                                    <td class="feed-mult">{{ feed.mood_mult }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
             </div>
             <div>
                 Calculations
                 <table class="item-list">
-                    <tr>
-                        <th scope="col">Item</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Second</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Suggested</th>
-                    </tr>
-                    {% for item in item_list %}
+                    <thead> 
                         <tr>
-                            <th scope="row">{{ item.item_name }}</th>
-                            <td id="{{ item.item_name }}-count-one">0</td>
-                            <td id="{{ item.item_name }}-count-two">0</td>
-                            <td id="{{ item.item_name }}-total">0</td>
-                            <td>{{ item.suggested_num }}</td>
+                            <th scope="col">Item</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Second</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Suggested</th>
                         </tr>
-                    {% endfor %}
+                    </thead>    
+                    <tbody>
+                        {% for item in item_list %}
+                            <tr>
+                                <th scope="row">{{ item.item_name }}</th>
+                                <td id="{{ item.item_name }}-count-one">0</td>
+                                <td id="{{ item.item_name }}-count-two">0</td>
+                                <td id="{{ item.item_name }}-total">0</td>
+                                <td>{{ item.suggested_num }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
         </div>

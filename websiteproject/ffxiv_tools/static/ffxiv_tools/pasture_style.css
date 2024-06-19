@@ -1,3 +1,7 @@
+body {
+    font-family: "myriad pro", sans-serif;
+}
+
 /* Flex box styling for page layout */
 .flex {
     display: flex;
@@ -7,7 +11,7 @@
 .flex-outer {
     flex-flow: row wrap;
     align-items: flex-start;
-    background-color: red;
+    background-color: #7a4988;
     gap: 24px;
 }
 
@@ -15,9 +19,10 @@
 .flex-inner {
     flex-direction: column;
     align-items: center flex-start;
-    background-color: purple;
+    background-color: #74ccff;
     outline: solid black;
     outline-width: thick;
+    border-radius: 10px;
     margin: 24px;
 }
 
@@ -53,6 +58,23 @@ flex-grow: 1;
     display: none;
 }
 
+/* Drag and drop elements */
+.animal-slot {
+    height: 31px;
+    border-radius: 10px;
+    border: solid 4px;
+    margin: 1px;
+    display: flex;
+    align-items: center;
+}
+
 .animal {
-    border: solid;
+    height: 27px;
+    flex-grow: 1;
+    border-radius: 8px;
+    border: solid 4px;
+}
+
+.drag-animal {
+    margin: 1px;
 }
