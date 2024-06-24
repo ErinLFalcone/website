@@ -1,4 +1,4 @@
-const dragItems = document.querySelectorAll(".animal");
+const dragItems = document.querySelectorAll(".drag-animal");
 var currentDragEl = null;
 var isDragging = false;
 
@@ -9,8 +9,7 @@ function regexTextCheck(text) {
     return regexPattern.test(text);
 }
 
-// Function and loop below to add dragstart listener to initial
-// draggable items
+// Function to add dragstart listener to draggable items
 function addDragstart(item) {
     item.addEventListener("dragstart", (e) => {
         currentDragEl = e.currentTarget;
@@ -21,8 +20,24 @@ function addDragstart(item) {
     });
 };
 
+// Function to add click listener to add items to drop list
+function addClickEvent(item) {
+    item.addEventListener("click", (e) => {
+        const firstEmptySlot = document.querySelector("div.animal-slot:not(.has-drop):not(.none-display)");
+        if (firstEmptySlot) {
+            firstEmptySlot.innerHTML = e.currentTarget.outerHTML;
+            firstEmptySlot.classList.add("has-drop");
+            dragClassRemover();
+            addDragstart(firstEmptySlot);
+        };
+        itemCountUpdate();
+    });
+}
+
+// Loop to add drag and click listeners to initial draggable items
 dragItems.forEach((item) => {
     addDragstart(item);
+    addClickEvent(item);
 });
 
 // Beginning of drop logic
@@ -30,7 +45,6 @@ dragItems.forEach((item) => {
 // used to remove class after drop, so dropdown filter doesn't target items
 function dragClassRemover() {
     const classyAnimal = document.querySelector("div.selected-animals .drag-animal");
-    console.log(typeof classyAnimal);
     if (classyAnimal) {
         classyAnimal.classList.remove("drag-animal");
     };
@@ -91,18 +105,6 @@ dropAreas.forEach((item) => {
         dropEvent(e);
         itemCountUpdate();
     });
-});
-
-// Click to add items to drop list
-const animalList = document.querySelector("div.animal-list");
-animalList.addEventListener("click", (e) => {
-    const firstEmptySlot = document.querySelector("div.animal-slot:not(.has-drop):not(.none-display)");
-    if (firstEmptySlot) {
-        firstEmptySlot.innerHTML = e.target.outerHTML;
-        firstEmptySlot.classList.add("has-drop");
-        addDragstart(firstEmptySlot);
-    };
-    itemCountUpdate();
 });
 
 // Clears filled slots, excludes slots with class passed as attribute
