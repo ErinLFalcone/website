@@ -10,6 +10,65 @@
 </head>
 <body>
     <div class="flex flex-outer">
+        <!-- Top content with calculation section -->
+        <div class="flex flex-inner inner-top">
+            <div>
+                <!-- Feed selector dropdown -->
+                <div class="dropdown">
+                    <button class="drop-button" id="feed-drop-button">Feed Selector</button>
+                    <div class="drop-container" id="feed-drop">
+                        {% for feed in feed_list %}
+                            <button onclick="dropSelectFunction('feed-choice', '.{{ feed.feed_name|cut:" " }}')" class="drop-choice">{{ feed.feed_name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <table class="feed-list">
+                        <thead>    
+                            <tr>
+                                <th scope="col">Selected Feed</th>
+                                <th scope="col">Multiplier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for feed in feed_list %}
+                                <tr class="feed-choice {{ feed.feed_name|cut:' ' }} {% cycle 'none-display' ''  'none-display' %}">
+                                    <th scope="row">{{ feed.feed_name }}</th>
+                                    <td class="feed-mult">{{ feed.mood_mult }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="calculations">
+                <br/>
+                <!-- Item calculation table -->
+                <table class="item-list">
+                    <thead> 
+                        <tr>
+                            <th scope="col">Item</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Second</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Suggested</th>
+                        </tr>
+                    </thead>    
+                    <tbody>
+                        {% for item in item_list %}
+                            <tr>
+                                <th scope="row">{{ item.item_name }}</th>
+                                <td id="{{ item.item_name }}-count-one">0</td>
+                                <td id="{{ item.item_name }}-count-two">0</td>
+                                <td id="{{ item.item_name }}-total">0</td>
+                                <td>{{ item.suggested_num }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Inner-left content with drop areas -->
         <div class="flex flex-inner inner-left">
             <div>
                 <!-- Dropdown to select number of available drop slots -->
@@ -43,7 +102,8 @@
                 </table>
             </div>
         </div>
-        <div class="flex flex-inner inner-mid">
+        <!-- Inner right content with animals to drag -->
+        <div class="flex flex-inner inner-right">
             <div>
                 <!-- Item filter dropdown menus -->
                 <div class="dropdown">
@@ -83,63 +143,6 @@
                         <div class="right box-text">{{ animal.item_2 }}</div>
                     </div>
                 {% endfor %}
-            </div>
-        </div>
-        <div class="flex flex-inner inner-right">
-            <div>
-                <!-- Feed selector dropdown -->
-                <div class="dropdown">
-                    <button class="drop-button" id="feed-drop-button">Feed Selector</button>
-                    <div class="drop-container" id="feed-drop">
-                        {% for feed in feed_list %}
-                            <button onclick="dropSelectFunction('feed-choice', '.{{ feed.feed_name|cut:" " }}')" class="drop-choice">{{ feed.feed_name }}</button>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div>
-                    <table class="feed-list">
-                        <thead>    
-                            <tr>
-                                <th scope="col">Selected Feed</th>
-                                <th scope="col">Multiplier</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for feed in feed_list %}
-                                <tr class="feed-choice {{ feed.feed_name|cut:' ' }} {% cycle 'none-display' ''  'none-display' %}">
-                                    <th scope="row">{{ feed.feed_name }}</th>
-                                    <td class="feed-mult">{{ feed.mood_mult }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div>
-                <br/>
-                <!-- Item calculation table -->
-                <table class="item-list">
-                    <thead> 
-                        <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Second</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Suggested</th>
-                        </tr>
-                    </thead>    
-                    <tbody>
-                        {% for item in item_list %}
-                            <tr>
-                                <th scope="row">{{ item.item_name }}</th>
-                                <td id="{{ item.item_name }}-count-one">0</td>
-                                <td id="{{ item.item_name }}-count-two">0</td>
-                                <td id="{{ item.item_name }}-total">0</td>
-                                <td>{{ item.suggested_num }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
