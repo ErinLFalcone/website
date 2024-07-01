@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {% load static %}
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Sans+Mono">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Nunito">
     <link rel="stylesheet" href="{% static 'ffxiv_tools/pasture_style.css' %}"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,44 +12,14 @@
     <div class="flex flex-outer">
         <!-- Top content with calculation section -->
         <div class="flex flex-inner inner-top">
-            <div>
-                <!-- Feed selector dropdown -->
-                <div class="dropdown">
-                    <button class="drop-button" id="feed-drop-button">Feed Selector</button>
-                    <div class="drop-container" id="feed-drop">
-                        {% for feed in feed_list %}
-                            <button onclick="dropSelectFunction('feed-choice', '.{{ feed.feed_name|cut:" " }}')" class="drop-choice">{{ feed.feed_name }}</button>
-                        {% endfor %}
-                    </div>
-                </div>
-                <div>
-                    <table class="feed-list">
-                        <thead>    
-                            <tr>
-                                <th scope="col">Selected Feed</th>
-                                <th scope="col">Multiplier</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for feed in feed_list %}
-                                <tr class="feed-choice {{ feed.feed_name|cut:' ' }} {% cycle 'none-display' ''  'none-display' %}">
-                                    <th scope="row">{{ feed.feed_name }}</th>
-                                    <td class="feed-mult">{{ feed.mood_mult }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <!-- Item calculation table -->
             <div class="calculations">
-                <br/>
-                <!-- Item calculation table -->
-                <table class="item-list">
+                <table class="item-table">
                     <thead> 
                         <tr>
-                            <th scope="col">Item</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Second</th>
+                            <th scope="col"></th>
+                            <th scope="col">Item One</th>
+                            <th scope="col">Item Two</th>
                             <th scope="col">Total</th>
                             <th scope="col">Suggested</th>
                         </tr>
@@ -66,6 +36,35 @@
                         {% endfor %}
                     </tbody>
                 </table>
+            </div>
+            <!-- Feed selector dropdown -->
+            <div class="feed-select">
+                <div class="dropdown">
+                    <button class="drop-button" id="feed-drop-button">Feed Selector</button>
+                    <div class="drop-container" id="feed-drop">
+                        {% for feed in feed_list %}
+                            <button onclick="dropSelectFunction('feed-choice', '.{{ feed.feed_name|cut:" " }}')" class="drop-choice">{{ feed.feed_name }}</button>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <table class="feed-list">
+                        <thead>
+                            <tr>
+                                <th scope="col">Selected Feed</th>
+                                <th scope="col">Multiplier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for feed in feed_list %}
+                                <tr class="feed-choice {{ feed.feed_name|cut:' ' }} {% cycle 'none-display' ''  'none-display' %}">
+                                    <th scope="row">{{ feed.feed_name }}</th>
+                                    <td class="feed-mult">{{ feed.mood_mult }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- Inner-left content with drop areas -->
@@ -84,7 +83,7 @@
             </div>
             <!-- Drop containers for drag and drop items -->
             <div class="selected-animals">
-                <h3>Animal Name</h3>
+                <p class="title">Animal Name</p>
                     {% for slot in animal_slot %}
                         {% if forloop.counter <= 5 %}
                         <div class="animal-slot small medium large">

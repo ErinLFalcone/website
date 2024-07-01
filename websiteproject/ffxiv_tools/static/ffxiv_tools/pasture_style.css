@@ -1,35 +1,8 @@
 body {
-    font-family: "Droid Sans Mono", sans-serif;
-}
-
-h1 {
-    font-size: 23px;
+    font-family: "Nunito", sans-serif;
     font-weight: 700;
-    line-height: 23px;
-}
-
-h3 {
-    font-size: 17px;
-    font-weight: 700;
-    line-height: 23px;
-}
-
-p {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 23px;
-}
-
-blockquote {
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 23px;
-}
-
-pre {
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 23px;
+    height: 100%;
+    margin: 0px;
 }
 
 /* Flex box styling for page layout */
@@ -42,15 +15,16 @@ pre {
     flex-flow: row wrap;
     align-items: flex-start;
     justify-content: center;
-    background-color: #7a4988;
+    background-color: #374a67;
+    margin: 0px;
 }
 
 /* Inner third sections */
 .flex-inner {
     flex-direction: column;
     align-items: center flex-start;
-    background-color: #74ccff;
-    outline: solid black;
+    background-color: #616283;
+    outline: solid #0e1116;
     outline-width: thick;
     border-radius: 10px;
     margin-top: 16px;
@@ -63,9 +37,8 @@ pre {
     width: 570px;
     flex-basis: 100%;
     display: flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
-    justify-content: center;
+    flex-flow: row;
+    align-items: stretch;
     margin-left: 25%;
     margin-right: 25%;
     max-width: 858px;
@@ -74,11 +47,14 @@ pre {
 .inner-left {
     width: 450px;
     flex-basis: 450px;
+    padding: 2px;
 }
 
 .inner-right {
     width: 450px;
     flex-basis: 450px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     padding-left: 3px;
     padding-right: 3px;
 }
@@ -105,8 +81,9 @@ pre {
 /* Drag and drop elements */
 .animal-slot {
     height: 26px;
+    background-color: #9e7b9b;
     border-radius: 10px;
-    border: solid 4px;
+    border: solid 4px #0e1116;
     margin: 1px;
     display: flex;
     align-items: center;
@@ -115,8 +92,9 @@ pre {
 .animal {
     height: 22px;
     flex-grow: 1;
+    background-color: #9e7b9b;
     border-radius: 8px;
-    border: solid 4px;
+    border: solid 4px #0e1116;
     display: flex;
     align-items: start;
     padding-left: 3px;
@@ -142,19 +120,75 @@ pre {
     flex-grow: 1;
 }
 
-table {
-    text-align: left;
-    border-collapse: collapse;
+/* Text and tables */
+
+.calculations {
+    flex-basis: 60%;
 }
 
-th {
-    font-weight: 400;
+.feed-select {
+    flex-basis: 40%;
+}
+
+.feed-list {
+    text-align: left;
+}
+
+p {
+    margin: 2px;
+    font-size: 16px;
+}
+
+table {
+    background-color: #c592f2;
+    border: solid #0e1116;
+    border-collapse: collapse;
+    text-align: right;
+    width: 100%;
+    min-width: 0;
 }
 
 tr {
-    border: dashed thin;
+    border: dashed thin #0e1116;
 }
 
 td {
-    font-weight: 700;
+    border-left: solid thin #0e1116;
+    padding-right: 2px;
+}
+
+table.item-table th:nth-child(1) {
+    width: 70px;
+    text-align: left;
+}
+
+table.item-table th:nth-child(2) {
+    width: 25%;
+    border-right: solid thin #0e1116;
+}
+
+table.item-table th:nth-child(3) {
+    width: 25%;
+    border-right: solid thin #0e1116;
+}
+
+table.item-table th:nth-child(4) {
+    width: 20%;
+    border-right: solid #0e1116;
+}
+
+table.item-table th:nth-child(5) {
+    width: 30%;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #9e7b9b;
+}
+  
+tbody tr:nth-child(even) {
+    background-color: #a88aa6;
+}
+
+tr td:nth-child(4) {
+    border-right: solid #0e1116;
 }
