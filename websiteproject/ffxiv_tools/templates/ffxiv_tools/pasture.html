@@ -47,23 +47,17 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div>
-                    <table class="feed-list">
-                        <thead>
-                            <tr>
-                                <th scope="col">Selected Feed</th>
-                                <th scope="col">Multiplier</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for feed in feed_list %}
-                                <tr class="feed-choice {{ feed.feed_name|cut:' ' }} {% cycle 'none-display' ''  'none-display' %}">
-                                    <th scope="row">{{ feed.feed_name }}</th>
-                                    <td class="feed-mult">{{ feed.mood_mult }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <div class="feed-list">
+                    <div class="flex">
+                        <div class="f-inner">Selected Feed</div>
+                        <div class="f-inner">Multiplier</div>
+                    </div>
+                    {% for feed in feed_list %}
+                        <div class="{{ feed.feed_name|cut:' ' }} flex {% cycle 'none-display' ''  'none-display' %}">
+                            <div class="f-inner feed-choice ">{{ feed.feed_name }}</div>
+                            <div class="feed-mult f-inner feed-choice ">{{ feed.mood_mult }}</div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -86,15 +80,15 @@
                 <p class="title">Animal Name</p>
                     {% for slot in animal_slot %}
                         {% if forloop.counter <= 5 %}
-                        <div class="animal-slot small medium large">
+                        <div class="animal-slot flex small medium large">
                         </div>
                         {% endif %}
                         {% if forloop.counter > 5 and forloop.counter <= 10 %}
-                        <div class="animal-slot medium large">
+                        <div class="animal-slot flex medium large">
                         </div>
                         {% endif %}
                         {% if forloop.counter > 10 and forloop.counter <= 20 %}
-                        <div class="animal-slot large">
+                        <div class="animal-slot flex large">
                         </div>
                         {% endif %}
                     {% endfor %}
@@ -136,10 +130,10 @@
             <!-- List of all animals -->
             <div class="animal-list">
                 {% for animal in animal_list %}
-                    <div draggable="true" class="animal drag-animal {{ animal.item_1 }}-one {{ animal.item_2 }}-two">
-                        <div class="left box-text">{{ animal.animal_name }}</div> 
-                        <div class="center box-text">{{ animal.item_1 }}</div>
-                        <div class="right box-text">{{ animal.item_2 }}</div>
+                    <div draggable="true" class="animal flex drag-animal {{ animal.item_1 }}-one {{ animal.item_2 }}-two">
+                        <div class="a-left box-text">{{ animal.animal_name }}</div> 
+                        <div class="a-center box-text">{{ animal.item_1 }}</div>
+                        <div class="a-right box-text">{{ animal.item_2 }}</div>
                     </div>
                 {% endfor %}
             </div>

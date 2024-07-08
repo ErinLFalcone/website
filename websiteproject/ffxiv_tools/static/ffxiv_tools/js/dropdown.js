@@ -28,8 +28,8 @@ document.addEventListener('click', function(e) {
 function dropSelectFunction(dropMenuClass, dropSelectionClass) {
     var selectHideList = document.querySelectorAll(`.${dropMenuClass}`);
     selectHideList.forEach((item) => {
-        if (item.classList.contains("block-display")) {
-            item.classList.remove("block-display");
+        if (item.classList.contains("flex")) {
+            item.classList.remove("flex");
         };
         item.classList.add("none-display");
     });
@@ -39,6 +39,6 @@ function dropSelectFunction(dropMenuClass, dropSelectionClass) {
         if (item.classList.contains("none-display")) {
             item.classList.remove("none-display");
         };
-        item.classList.add("block-display");
+        item.classList.add("flex");
     });
 };
